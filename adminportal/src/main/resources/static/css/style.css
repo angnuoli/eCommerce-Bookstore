@@ -1,0 +1,102 @@
+.page-top {
+	margin-top: -70px;
+}
+
+hr {
+	border: none;
+	height: 1px;
+	color: #333;
+	background-color: #333;
+}
+
+.navbar {
+	margin-bottom: 20px;
+}
+
+.container {
+	width: 90%;
+	min-width: 940px;
+}
+
+.home-headline {
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 24px;
+	color: #fff;
+	margin: auto;
+	text-align: center;
+	margin-top: -13px;
+}
+
+.home-headline span {
+	background-color: #231F20;
+	padding: 5px 22px;
+}
+
+.section-headline {
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 24px;
+	color: #fff;
+	margin: auto;
+	text-align: center;
+	margin-top: 9%;
+}
+
+.section-headline span {
+	background-color: #231F20;
+	padding: 5px 22px;
+}
+
+#loginHr {
+	border: 1px solid rgba(0,0,0,0);
+}
+
+#loginHr hr {
+	 margin-top: -13.3%;
+	 width: 100%; 
+	 height: 6px; 
+	 background-color: #333; 
+	 z-index: -1; 
+	 overflow: hidden;
+}
+
+#admin-menu-navbar.navbar-default .navbar-brand {
+    color: rgba(255, 255, 255, 1);
+}
+#admin-menu-navbar.navbar-default {
+    font-size: 14px;
+    background-color: rgba(209, 101, 0, 1);
+    background: -webkit-linear-gradient(top, rgba(255, 82, 82, 1) 0%, rgba(209, 101, 0, 1) 100%);
+    background: linear-gradient(to bottom, rgba(255, 82, 82, 1) 0%, rgba(209, 101, 0, 1) 100%);
+    border-width: 1px;
+    border-radius: 4px;
+}
+#admin-menu-navbar.navbar-default .navbar-nav>li>a {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(248, 248, 248, 0);
+}
+#admin-menu-navbar.navbar-default .navbar-nav>li>a:hover,
+#admin-menu-navbar.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(51, 51, 51, 1);
+    background-color: rgba(248, 248, 248, 0);
+}
+#admin-menu-navbar.navbar-default .navbar-nav>.active>a,
+#admin-menu-navbar.navbar-default .navbar-nav>.active>a:hover,
+#admin-menu-navbar.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(85, 85, 85, 1);
+    background-color: rgba(231, 231, 231, 1);
+}
+#admin-menu-navbar.navbar-default .navbar-toggle {
+    border-color: #ddd;
+}
+#admin-menu-navbar.navbar-default .navbar-toggle:hover,
+#admin-menu-navbar.navbar-default .navbar-toggle:focus {
+    background-color: #ddd;
+}
+#admin-menu-navbar.navbar-default .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+#admin-menu-navbar.navbar-default .navbar-toggle:hover .icon-bar,
+#admin-menu-navbar.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #d16500;
+}
+
