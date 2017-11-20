@@ -181,6 +181,7 @@
 												<input type="text" class="form-control" id="billingAddress" placeholder="Street Address Line 2" th:name="userBillingStreet2" th:value="${userBilling.userBillingStreet2}"/>
 											</div>
 
+											<!-- City, State and Country -->
 											<div class="row">
 												<!-- City -->
 												<div class="col-xs-4">
@@ -189,7 +190,7 @@
 														<input type="text" class="form-control" id="billingCity" placeholder="City" th:name="userBillingCity" required="required" th:value="${userBilling.userBillingCity}"/>
 													</div>
 												</div>
-
+											
 												<!-- State -->
 												<div class="col-xs-4">
 													<div class="form-group">
@@ -200,13 +201,21 @@
 														</select>
 													</div>
 												</div>
-
-
+											
+											
 												<!-- Zipcode -->
 												<div class="col-xs-4">
 													<div class="form-group">
 														<label for="billingZipcode">* Zipcode</label>
-														<input type="text" class="form-control" id="billingZipcode" placeholder="Billing Zipcode" th:name="userBillingZipcode" required="required" th:value="${userBilling.userBillingZipcode}"/>
+														<input type="text" class="form-control" id="billingZipcode" placeholder="Zipcode" th:name="userBillingZipcode" required="required" th:value="${userBilling.userBillingZipcode}"/>
+													</div>
+												</div>
+												
+												<!-- Country -->
+												<div class="col-xs-4">
+													<div class="form-group">
+														<label for="billingCountry">* Country</label>
+														<input type="text" class="form-control" id="billingCountry" placeholder="Country" th:name="userBillingCountry" required="required" th:value="${userBilling.userBillingCountry}"/>
 													</div>
 												</div>
 											</div>
@@ -292,9 +301,10 @@
 													</div>
 												</div>
 
-												<hr/>
-												<button class="btn btn-primary btn-lg" type="submit">Save All</button>
+												
 											</div>
+											<hr/>
+											<button class="btn btn-primary btn-lg" type="submit">Save All</button>
 										</form>
 									</div>
 								</div>
