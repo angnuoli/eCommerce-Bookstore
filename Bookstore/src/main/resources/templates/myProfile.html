@@ -16,7 +16,7 @@
 			
 		</div>
 		<hr
-			style="position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px;" />
+			style="position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -8%;" />
 		<img src="/image/wood.png" alt="" class="img-responsive" style="margin-top: -75px;" />
 
 		<div class="row" style="margin-top: 60px">
@@ -31,6 +31,7 @@
 				
 				<!-- Tab panels -->
 				<div class="tab-content">
+
 					<!-- Edit user information -->
 					<div class="tab-pane fade" id="tab-1" th:classappend="${classActiveEdit}? 'in active'">
 						<div class="panel-group">
@@ -98,6 +99,208 @@
 							</div>
 						</div>
 					</div>
+
+					<!-- Order Information -->
+					<div class="tab-pane fade" id="tab-2" th:classappend="${classActiveOrder}? 'in active'">
+						<div class="panel-group">
+							<div class="panel panel-default" style="border:none">
+								<div class="panel-body" style="background-color: #ededed; margin-top: 20px;">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Billing Information -->
+					<div class="tab-pane fade" id="tab-3" th:classappend="${classActiveBilling}? 'in active'">
+						<div class="panel-group">
+							<div class="panel panel-default" style="border:none">
+								<div class="panel-body" style="background-color: #ededed; margin-top: 20px;">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item active">
+											<a th:href="@{/listOfCreditCards}" th:style="${listOfCreditCards} ? 'color:red'">List of Credit Cards</a>
+										</li>
+										<li class="breadcrumb-item active">
+											<a th:href="@{/addNewCreditCard}" th:style="${addNewCreditCard} ? 'color:red'">Add(Update) Credit Card</a>
+										</li>
+									</ol>
+
+									<div th:if="${listOfCreditCards}">
+										<form th:action="@{/setDefaultPayment}" method="post">
+											<table class="table">
+												<thead>
+													<tr>
+														<th>Default</th>
+														<th>Credit Card</th>
+														<th>Operations</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="userPayment : ${userPaymentList}">
+														<td>
+															<input type="radio" name="defaultUserPaymentId" th:value:="${userPayment.id}" th:checked="userPayment.defaultPayment" />
+														</td>
+														<td th:text="${userPayment.cardName}"></td>
+														<td>
+															<a th:href="@{/updateCreditCard(id=${userPayment.id})}"><i class="fa fa-pencil"></i></a>
+															<a th:href="@{/removeCreditCard(id=${userPayment.id})}"><i class="fa fa-times"></i></a>
+														</td>
+
+													</tr>
+												</tbody>
+											</table>
+											<button class="btn btn-primary" type="submit">Save</button>
+										</form>
+									</div>
+
+									<div th:if="${addNewCreditCard}">
+										<form th:action="@{addNewCreditCard}" method="post">
+											<div class="bg-info" th:if="${updateUserPaymentInfo}">User info updated</div>
+											<input hidden="hidden" name="id" th:value="${userPayment.id}" />
+
+											<div class="form-group">
+												<h5>* Give a name for your card: </h5>
+												<input type="text" class="form-control" id="cardName" placeholder="Card Name" th:name="cardName" required="required" th:value="${userPayment.cardName}" />
+											</div>
+
+											<!-- Billing Address -->
+											<hr/>
+											<div class="form-group">
+												<h4>Billing Address</h4>
+											</div>
+											<!-- Name -->
+											<div class="form-group">
+												<label for="billingName">* Name</label>
+												<input type="text" class="form-control" id="billingName" placeholder="Receiver Name" th:name="userBillingName" required="required" th:value="${userBilling.userBillingName}"/>
+											</div>
+											<!-- Street Address -->
+											<div class="form-group">
+												<label for="billingAddress">* Street Address</label>
+												<input type="text" class="form-control" id="billingAddress" placeholder="Street Address Line 1" th:name="userBillingStreet1" required="required" th:value="${userBilling.userBillingStreet1}"/>
+
+												<input type="text" class="form-control" id="billingAddress" placeholder="Street Address Line 2" th:name="userBillingStreet2" th:value="${userBilling.userBillingStreet2}"/>
+											</div>
+
+											<div class="row">
+												<!-- City -->
+												<div class="col-xs-4">
+													<div class="form-group">
+														<label for="billingCity">* City</label>
+														<input type="text" class="form-control" id="billingCity" placeholder="City" th:name="userBillingCity" required="required" th:value="${userBilling.userBillingCity}"/>
+													</div>
+												</div>
+
+												<!-- State -->
+												<div class="col-xs-4">
+													<div class="form-group">
+														<label for="billingState">* State</label>
+														<select th:name="userBillingState" id="billingState" class="form-control" required="required">
+															<option value="" disabled="disabled">Please select an option</option>
+															<option th:each="state: ${stateList}" th:text="${state}" th:selected="${userBilling.userBillingState} ? (${userBilling.userBillingState} == ${state})"></option>
+														</select>
+													</div>
+												</div>
+
+
+												<!-- Zipcode -->
+												<div class="col-xs-4">
+													<div class="form-group">
+														<label for="billingZipcode">* Zipcode</label>
+														<input type="text" class="form-control" id="billingZipcode" placeholder="Billing Zipcode" th:name="userBillingZipcode" required="required" th:value="${userBilling.userBillingZipcode}"/>
+													</div>
+												</div>
+											</div>
+
+											<!-- Credit Card Information -->
+											<hr/>
+											<div class="form-group">
+												<h4>Credit Card Information</h4>
+											</div>
+											<div class="row">
+												<div class="col-xs-12">
+													<img src="/image/creditcard.png" class="img-responsive"/><br/>
+													<div class="form-group">
+														<label for="cardType">* Select Card Type:</label>
+														<select th:name="type" id="cardType" th:value="${userPayment.type}" class="form-control">
+															<option value="visa">Visa</option>
+															<option value="masterCard">MasterCard</option>
+															<option value="discover">Discover</option>
+															<option value="amex">American Express</option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label for="cardHolder">* Card Holder Name:</label>
+														<input type="text" class="form-control" id="cardHolder" required="required" th:name="holderName" placeholder="Card Holder Name" th:value="${userPayment.holderName}"/>
+													</div>
+													<div class="form-group">
+														<label for="cardNumber">* Card Numbrt:</label>
+														<div class="input-group">
+															<input type="tel" class="form-control" id="cardNumber" required="required" th:name="cardNumber" placeholder="Valid Card Number" th:value="${userPayment.cardNumber}"/>
+															<span class="input-group-addon"><i class="fa fa-credit-card" aria-hidden="true"></i></span>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-xs-7">
+													<div class="form-group">
+														<label>* Expiration Date</label>
+														<div class="row">
+															<div class="col-xs-6">
+																<select name="expiryMonth" id="" class="form-control" required="required" th:value="${userPayment.expiryMonth}">
+																	<option disabled="disabled">-- Month --</option>
+																	<option value="01">Jan (01)</option>
+																	<option value="02">Feb (02)</option>
+																	<option value="03">Mar (03)</option>
+																	<option value="04">Apr (04)</option>
+																	<option value="05">May (05)</option>
+																	<option value="06">Jun (06)</option>
+																	<option value="07">Jul (07)</option>
+																	<option value="08">Aug (08)</option>
+																	<option value="09">Sep (09)</option>
+																	<option value="10">Oct (10)</option>
+																	<option value="11">Nov (11)</option>
+																	<option value="12">Dec (12)</option>
+																</select>
+															</div>
+															<div class="col-xs-6">
+																<select name="expiryYear" id="" class="form-control" required="required" th:value="${userPayment.expiryYear}">
+																	<option disabled="disabled">-- Year --</option>
+																	<option value="2017">2017</option>
+																	<option value="2018">2018</option>
+																	<option value="2019">2019</option>
+																	<option value="2020">2020</option>
+																	<option value="2021">2021</option>
+																	<option value="2022">2022</option>
+																	<option value="2023">2023</option>
+																	<option value="2024">2024</option>
+																	<option value="2025">2025</option>
+																	<option value="2026">2026</option>
+																	<option value="2027">2027</option>
+																	<option value="2028">2028</option>
+																	<option value="2029">2029</option>
+																</select>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-xs-5">
+													<div class="form-group">
+														<label for="cardCvc">CVC</label>
+														<input type="tel" id="cardCvc" class="form-control" placeholder="cvc" th:name="cvc" th:value="${userPayment.cvc}? ${userPayment.cvc}" />
+													</div>
+												</div>
+
+												<hr/>
+												<button class="btn btn-primary btn-lg" type="submit">Save All</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -107,3 +310,36 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
