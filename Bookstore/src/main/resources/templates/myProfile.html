@@ -142,8 +142,16 @@
 														</td>
 														<td th:text="${userPayment.cardName}"></td>
 														<td>
-															<a th:href="@{/updateCreditCard(id=${userPayment.id})}"><i class="fa fa-pencil"></i></a>
-															<a th:href="@{/removeCreditCard(id=${userPayment.id})}"><i class="fa fa-times"></i></a>
+															<div class="row">
+																<div class="col-xs-1">
+																	<a th:href="@{/updateCreditCard(id=${userPayment.id})}"><i class="fa fa-pencil"></i></a>
+																</div>
+																
+																<div class="col-xs-1">
+																	<a th:href="@{/removeCreditCard(id=${userPayment.id})}"><i class="fa fa-times"></i></a>
+																</div>
+															</div>
+															
 														</td>
 
 													</tr>
@@ -242,7 +250,7 @@
 														<input type="text" class="form-control" id="cardHolder" required="required" th:name="holderName" placeholder="Card Holder Name" th:value="${userPayment.holderName}"/>
 													</div>
 													<div class="form-group">
-														<label for="cardNumber">* Card Numbrt:</label>
+														<label for="cardNumber">* Card Number:</label>
 														<div class="input-group">
 															<input type="tel" class="form-control" id="cardNumber" required="required" th:name="cardNumber" placeholder="Valid Card Number" th:value="${userPayment.cardNumber}"/>
 															<span class="input-group-addon"><i class="fa fa-credit-card" aria-hidden="true"></i></span>
