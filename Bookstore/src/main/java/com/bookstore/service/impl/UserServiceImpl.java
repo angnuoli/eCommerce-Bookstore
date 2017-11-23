@@ -1,5 +1,6 @@
 package com.bookstore.service.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -10,11 +11,14 @@ import org.springframework.stereotype.Service;
 import com.bookstore.domain.User;
 import com.bookstore.domain.UserBilling;
 import com.bookstore.domain.UserPayment;
+import com.bookstore.domain.UserShipping;
 import com.bookstore.domain.security.PasswordResetToken;
 import com.bookstore.domain.security.UserRole;
 import com.bookstore.repository.PasswordResetTokenRepository;
 import com.bookstore.repository.RoleRepository;
+import com.bookstore.repository.UserPaymentRepository;
 import com.bookstore.repository.UserRepository;
+import com.bookstore.repository.UserShippingRepository;
 import com.bookstore.service.UserService;
 
 @Service
@@ -30,6 +34,12 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private PasswordResetTokenRepository passwordResetTokenRepository;
+	
+	@Autowired
+	private UserPaymentRepository userPaymentRepository;
+	
+	@Autowired 
+	private UserShippingRepository userShippingRepository;
 	
 	@Override
 	public PasswordResetToken getPasswordResetToken(final String token) {
@@ -80,9 +90,43 @@ public class UserServiceImpl implements UserService{
 	public void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user) {
 		userPayment.setUser(user);
 		userPayment.setUserBilling(userBilling);
-		userPayment.setDefaultPayment(true);
 		userBilling.setUserPayment(userPayment);
 		user.getUserPaymentList().add(userPayment);
 		save(user);
+	}
+	
+	@Override
+	public void setUserDefaultPayment(Long defaultUserPaymentId, User user) {
+		List<UserPayment> userPaymentList = (List<UserPayment>) userPaymentRepository.findAll();
+		
+		for (UserPayment userPayment: userPaymentList) {
+			if (userPayment.getId() == defaultUserPaymentId) {
+				userPayment.setDefaultPayment(true);
+			} else {
+				userPayment.setDefaultPayment(false);
+			}
+			userPaymentRepository.save(userPayment);
+		}
+	}
+	
+	@Override 
+	public void updateUserShipping(UserShipping userShipping, User user) {
+		userShipping.setUser(user);
+		user.getUserShippingList().add(userShipping);
+		save(user);
+	}
+	
+	@Override
+	public void setUserDefaultShipping(Long defaultUserShippingId, User user) {
+		List<UserShipping> userShippingList = (List<UserShipping>) userShippingRepository.findAll();
+		
+		for (UserShipping userShipping: userShippingList) {
+			if (userShipping.getId() == defaultUserShippingId) {
+				userShipping.setUserShippingDefault(true);
+			} else {
+				userShipping.setUserShippingDefault(false);
+			}
+			userShippingRepository.save(userShipping);
+		}
 	}
 }
