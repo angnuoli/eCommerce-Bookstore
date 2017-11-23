@@ -1,13 +1,18 @@
 package com.adminportal.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Book {
@@ -23,7 +28,7 @@ public class Book {
 	private String category;
 	private int numberOfPages;
 	private String format;
-	private String isbn;
+	private int isbn;
 	private double shippingWeight;
 	private double listPrice;
 	private double ourPrice;
@@ -35,6 +40,10 @@ public class Book {
 	
 	@Transient
 	private MultipartFile bookImage;
+	
+	@OneToMany(mappedBy = "book")
+	@JsonIgnore
+	private List<BookToCartItem> bookToCartItemList;
 	
 	public Long getId() {
 		return id;
@@ -90,10 +99,10 @@ public class Book {
 	public void setFormat(String format) {
 		this.format = format;
 	}
-	public String getIsbn() {
+	public int getIsbn() {
 		return isbn;
 	}
-	public void setIsbn(String isbn) {
+	public void setIsbn(int isbn) {
 		this.isbn = isbn;
 	}
 	public double getShippingWeight() {
@@ -138,5 +147,12 @@ public class Book {
 	public void setBookImage(MultipartFile bookImage) {
 		this.bookImage = bookImage;
 	}
+	public List<BookToCartItem> getBookToCartItemList() {
+		return bookToCartItemList;
+	}
+	public void setBookToCartItemList(List<BookToCartItem> bookToCartItemList) {
+		this.bookToCartItemList = bookToCartItemList;
+	}
+	
 	
 }
