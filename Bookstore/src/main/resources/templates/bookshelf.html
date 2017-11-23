@@ -6,18 +6,17 @@
 	<div th:replace="common/header :: common-navbar"></div>
 
 	<div class="container">
-		<div class="row" style="margin-bottom: -100px">
+		<div class="row">
 			<div class="col-xs-8">
 				<h2 class="section-headline"><span th:text="${user}? 'Hi, ' + ${#strings.toUpperCase(user.username)} : 'All Books'"></span></h2>
 			</div>
-			<div class="col-xs-4">
+			<div class="col-xs-4" style="margin-bottom: -8%">
 				<img src="/image/logo.png" alt="" class="img-responsive" />
 			</div>
 		</div>
-		<!-- <div th:replace="common/header :: decoration"></div> -->
-		<hr
-			style="position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; margin-top: -8%;" />
-		<img src="/image/wood.png" alt="" class="img-responsive" style="margin-top: -75px;" />
+		
+		<!-- horizontal line and wood picture -->
+		<div th:replace="common/header :: frontpart-decoration"></div>
 
 		<div class="row" style="margin-top: 60px">
 			<div class="col-xs-9 col-xs-offset-3">
