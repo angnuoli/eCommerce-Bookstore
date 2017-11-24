@@ -8,9 +8,9 @@
 <title>Li's Bookstore</title>
 
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/css/non-responsive.css" />
-<link href="/css/style.css" rel="stylesheet" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/non-responsive.css}" />
+<link th:href="@{/css/style.css}" rel="stylesheet" />
 
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script>tinymce.init({ selector:'textarea' });</script>
@@ -62,7 +62,7 @@
 
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a >Shopping Cart</a></li>
+						<li><a th:href="@{/shoppingCart/cart}">Shopping Cart</a></li>
 						<li><a sec:authorize="isAnonymous()" th:href="@{/login}">Log In</a></li>
 						<li><a sec:authorize="isAuthenticated()" th:href="@{/myProfile}">MY ACCOUNT</a></li>
 						<li><a sec:authorize="isAnonymous()" th:href="@{/signUp}">Sign Up</a></li>
@@ -78,7 +78,7 @@
 	<!-- horizontal line and wood picture -->
 	<div th:fragment="frontpart-decoration">
 		<hr
-				style="position: absolute; width: 100%; height: 6px; background-color: #333; z-index: -1; top: 160px" />
+				style="position: absolute; width: 85%; height: 6px; background-color: #333; z-index: -1; top: 160px" />
 		
 		<img src="/image/wood.png" class="img-responsive" />
 	</div>

@@ -85,6 +85,14 @@ public class CartItem {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
 	
 	
 }
