@@ -35,7 +35,10 @@
 						Oops, your cart is empty. See if you can find what you like in the bookshelf and add them to cart.
 					</div>
 					<div class="row">
-						<div class="col-xs-8"><h4>Products</h4></div>
+						<div class="col-xs-2"><center>
+							<h4>Product</h4>
+						</center></div>
+						<div class="col-xs-6"></div>
 						<div class="col-xs-2"><h4>Price</h4></div>
 						<div class="col-xs-2"><h4>Qty</h4></div>
 					</div>
@@ -46,11 +49,15 @@
 							<hr />
 							<div class="col-xs-2">
 								<a th:href="@{bookDetail(id=${cartItem.book.id})}">
-									<img class="img-responsive shelf-book" th:src="#{adminPath}+@{/image/book/}+${cartItem.book.id}+'.png'"/>
+									<img class="img-responsive shelf-book center-block" th:src="#{adminPath}+@{/image/book/}+${cartItem.book.id}+'.png'" style="width: 70px" />
 								</a>
+							</div>
+							<div class="col-xs-6" style="padding-left: %;">
+								<a th:href="@{/bookDetail?id=} + ${cartItem.book.id}"><h4 th:text="${cartItem.book.title}"></h4></a>
 								<p th:if="${cartItem.book.inStockNumber&gt;10}" style="color: green;">In Stock</p>
-								<p th:if="${cartItem.book.inStockNumber&lt;10 and cartItem.book.inStockNumber&gt;0}" style="color: green;">Only <span th:text="${cartItem.book.inStockNumber}"></span> In Stock</p>
+								<p th:if="${cartItem.book.inStockNumber&lt;=10 and cartItem.book.inStockNumber&gt;0}" style="color: red;">Only <span th:text="${cartItem.book.inStockNumber}"></span> in stock</p>
 								<p th:if="${cartItem.book.inStockNumber==0}" style="color: darkred;">Product Unavailable</p>
+								<a th:href="@{/shoppingCart/removeCartItem?id=}+${cartItem.id}">delete</a>
 							</div>
 
 							<div class="col-xs-2">

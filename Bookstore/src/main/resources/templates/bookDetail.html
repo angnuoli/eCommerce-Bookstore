@@ -52,11 +52,11 @@
 												<option th:each="qty : ${qtyList}" th:value="${qty}" th:text="${qty}"></option>
 											</select>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-xs-6 text-right">
 											<h4 th:if="*{book.inStockNumber&gt;10}" style="color: green">In Stock</h4>
-											<h4 th:if="*{book.inStockNumber &lt;= 10 and book.inStockNumber &gt; 0}" style="color: red">Only <span th:text="${book.inStockNumber}"></span> In Stock</h4>
+											<h4 th:if="*{book.inStockNumber &lt;= 10 and book.inStockNumber &gt; 0}" style="color: red">Only <span th:text="${book.inStockNumber}"></span> in stock - order soon.</h4>
 											<h4 th:if="*{book.inStockNumber==0}" style="color: darkred;">Unavailable</h4>
-											<button type="submit" class="btn btn-warning" style="color: black; border: 1px solid black; padding: 10px 40px 10px 40px;">Add to Cart</button>
+											<button type="submit" class="btn btn-warning text-right" style="color: black; border: 1px solid black; padding: 10px 40px 10px 40px;">Add to Cart</button>
 										</div>
 									</div>
 								</div>
