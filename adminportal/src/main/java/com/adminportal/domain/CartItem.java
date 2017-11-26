@@ -20,6 +20,7 @@ public class CartItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private int qty;
 	private BigDecimal subTotal;
 	
 	@OneToOne
@@ -83,6 +84,14 @@ public class CartItem {
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
 	
 	
