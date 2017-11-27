@@ -19,7 +19,7 @@
 		<div th:replace="common/header :: frontpart-decoration"></div>
 
 		<div class="row" style="margin-top: 10px;">
-			<form th:action="@{/checkout}" method="post">
+			<form th:action="@{/submitOrder}" method="post">
 
 				<!-- Left panel -->
 				<div class="col-xs-4">
@@ -99,6 +99,13 @@
 									</table>
 
 									<div class="form-group">
+										<label for="shippingName">* Name</label> <input type="text"
+											class="form-control" id="shippingName"
+											placeholder="Receiver Name" name="shippingAddressName"
+											th:value="${shippingAddress.shippingAddressName}" />
+									</div>
+
+									<div class="form-group">
 										<label for="shippingStreet">* Street Address</label>
 										<input type="text" class="form-control" id="shippingStreet" placeholder="Street Address Line 1" name="shippingAddressStreet1" th:value="${shippingAddress.shippingAddressStreet1}" />
 									</div>
@@ -124,6 +131,22 @@
 													<option value="" disabled="disabled">Please select an option</option>
 													<option th:each="state: ${stateList}" th:text="${state}" th:selected="${shippingAddress.shippingAddressState} ? (${shippingAddress.shippingAddressState} == ${state})"></option>
 												</select>
+											</div>
+										</div>
+
+										<!-- Zipcode -->
+										<div class="col-xs-4">
+											<div class="form-group">
+												<label for="shippingZipcode">* Zipcode</label>
+												<input type="text" class="form-control shippingAddress" id="shippingZipcode" placeholder="Zipcode" th:name="shippingAddressZipcode" required="required" th:value="${shippingAddress.shippingAddressZipcode}"/>
+											</div>
+										</div>
+
+										<!-- Country -->
+										<div class="col-xs-4">
+											<div class="form-group">
+												<label for="shippingCountry">* Country</label>
+												<input type="text" class="form-control" id="shippingAddressCountry" placeholder="Country" th:name="shippingAddressCountry" required="required" th:value="${shippingAddress.shippingAddressCountry}"/>
 											</div>
 										</div>
 									</div>
@@ -245,7 +268,7 @@
 
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" id="theSameAsShippingAddress" name="billingSameAsShippingAddress" value="true"/>The same as shipping address
+											<input type="checkbox" id="theSameAsShippingAddress" name="billingSameAsShipping" value="true" checked="checked" />The same as shipping address
 										</label>
 									</div>
 
@@ -366,7 +389,7 @@
 									</div>
 
 									<hr />
-									<h4 class="col-xs-12 text-right"><strong style="font-size: large;">Order Total(<span th:text="${#lists.size(cartItemList)}"></span> items):</strong><span style="color: #db3208; font-size: large;">$<span th:text="${shoppingCart.grandTotal}"></span></span></h4>
+									<h4 class="col-xs-12 text-right"><strong style="font-size: large;">Order Total (<span th:text="${#lists.size(cartItemList)}"></span> items): </strong><span style="color: #db3208; font-size: large;">$<span th:text="${shoppingCart.grandTotal}"></span></span></h4>
 
 									<br/><br/>
 									<button type="submit" class="btn btn-warning btn-block">Place your order</button>

@@ -26,6 +26,8 @@
 					<img th:src="#{adminPath}+@{/image/book/}+${book.id}+'.png'" alt="" class="img-responsive shelf-book" />
 				</div>
 				<div class="col-xs-9">
+					<h3><span th:if="${addBookSuccess}" style="color: forestgreen"><i class="fa fa-check" aria-hidden="true" style="color: forestgreen"></i>Added to cart.</span></h3>
+    			<h3><span th:if="${notEnoughStock}" style="color: red">Oops, only <span th:text="${book.inStockNumber}"></span> In Stock.</span></h3>
 					<h3 th:text="${book.title}">Book title</h3>
 					<div class="row">
 						<div class="col-xs-5">
@@ -55,7 +57,7 @@
 										<div class="col-xs-6 text-right">
 											<h4 th:if="*{book.inStockNumber&gt;10}" style="color: green">In Stock</h4>
 											<h4 th:if="*{book.inStockNumber &lt;= 10 and book.inStockNumber &gt; 0}" style="color: red">Only <span th:text="${book.inStockNumber}"></span> in stock - order soon.</h4>
-											<h4 th:if="*{book.inStockNumber==0}" style="color: darkred;">Unavailable</h4>
+											<h4 th:if="*{book.inStockNumber&lt;=0}" style="color: darkred;">Unavailable</h4>
 											<button type="submit" class="btn btn-warning text-right" style="color: black; border: 1px solid black; padding: 10px 40px 10px 40px;">Add to Cart</button>
 										</div>
 									</div>

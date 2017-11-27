@@ -35,6 +35,9 @@
 				<div th:if="${emptyCart}" class="alert alert-warning">
 					Oops, your cart is empty. See if you can find what you like in the bookshelf and add them to cart.
 				</div>
+				<div th:if="${orderFailed}" class="alert alert-warning">
+					Oops, fail to place your order. Please check if products are available.
+				</div>
 			</div>	
 
 			<!-- form headline -->
@@ -60,7 +63,7 @@
 						<a th:href="@{/bookDetail?id=} + ${cartItem.book.id}"><h4 th:text="${cartItem.book.title}"></h4></a>
 						<p th:if="${cartItem.book.inStockNumber&gt;10}" style="color: green;">In Stock</p>
 						<p th:if="${cartItem.book.inStockNumber&lt;=10 and cartItem.book.inStockNumber&gt;0}" style="color: red;">Only <span th:text="${cartItem.book.inStockNumber}"></span> in stock</p>
-						<p th:if="${cartItem.book.inStockNumber==0}" style="color: darkred;">Product Unavailable</p>
+						<p th:if="${cartItem.book.inStockNumber&lt;=0}" style="color: darkred;">Product Unavailable</p>
 						<a th:href="@{/shoppingCart/removeCartItem?id=}+${cartItem.id}">delete</a>
 					</div>
 
@@ -79,7 +82,7 @@
 
 			<div class="row">
 				<hr />
-				<h4 class="col-xs-12 text-right"><strong style="font-size: large;">Total Price(<span th:text="${#lists.size(cartItemList)}"></span> items):</strong><span style="color: #db3208; font-size: large;">$<span th:text="${shoppingCart.grandTotal}"></span></span></h4>
+				<h4 class="col-xs-12 text-right"><strong style="font-size: large;">Total Price (<span th:text="${#lists.size(cartItemList)}"></span> items): </strong><span style="color: #db3208; font-size: large;">$<span th:text="${shoppingCart.grandTotal}"></span></span></h4>
 			</div>
 		</div>
 			
