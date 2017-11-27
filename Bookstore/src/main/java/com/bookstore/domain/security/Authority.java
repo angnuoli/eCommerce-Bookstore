@@ -3,6 +3,11 @@ package com.bookstore.domain.security;
 import org.springframework.security.core.GrantedAuthority;
 
 public class Authority implements GrantedAuthority{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8024719241936850070L;
+	
 	private final String authority;
 	
 	public Authority(String authority) {
