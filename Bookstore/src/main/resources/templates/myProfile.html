@@ -108,21 +108,23 @@
 					</div>
 
 					<!-- Order Information -->
-					<div class="tab-pane fade" id="tab-2" th:classappend="${classActiveOrder}? 'in active'">
+					<div class="tab-pane fade" id="tab-2" th:classappend="${classActiveOrders}? 'in active'">
 						<div class="panel-group">
 							<div class="panel panel-default" style="border:none">
 								<div class="panel-body" style="background-color: #ededed; margin-top: 20px;">
 									
 									<table class="table table-sm table-inverse">
 										<thead>
-											<tr>Order Date</tr>
-											<tr>Order Number</tr>
-											<tr>Order Total</tr>
-											<tr>Order Status</tr>
+											<tr>
+												<th>Order Date</th>
+												<th>Order Number</th>
+												<th>Order Total</th>
+												<th>Order Status</th>
+											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="${order: ${orderList}}">
-												<td><a th:href="@{orderDetail(id=${order.id})"><span th:text="${order.orderDate}"></span></a></td>
+											<tr th:each="order: ${orderList}">
+												<td><a th:href="@{/orderDetail(id=${order.id})}"><span th:text="${order.orderDate}"></span></a></td>
 												<td data-th-text="${order.id}"></td>
 												<td data-th-text="${order.orderTotal}"></td>
 												<td data-th-text="${order.orderStatus}"></td>
@@ -205,8 +207,8 @@
 																<tr th:each="cartItem : ${cartItemList}">
 																	<td data-th-text="${cartItem.book.title}"></td>
 																	<td class="text-center" data-th-text="${cartItem.book.ourPrice}"></td>
-																	<td class="text-center" data-th-text="${cartItem.book.qty}"></td>
-																	<td class="text-right" data-th-text="${cartItem.book.subTotal}"></td>
+																	<td class="text-center" data-th-text="${cartItem.qty}"></td>
+																	<td class="text-right" data-th-text="${cartItem.subTotal}"></td>
 																</tr>
 																<tr>
 																	<td class="highrow"></td>

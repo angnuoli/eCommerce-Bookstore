@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class UserShipping {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 	private String userShippingName;
 	private String userShippingStreet1;
 	private String userShippingStreet2;
@@ -34,11 +34,11 @@ public class UserShipping {
 	private User user;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getUserShippingName() {
