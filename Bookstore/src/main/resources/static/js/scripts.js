@@ -10,10 +10,33 @@ function checkBillingAddress() {
 	}
 }
 
+function checkPasswordMatch() {
+	var password = $("#txtNewPassword").val();
+	var confirmPassword = $("#txtConfirmPassword").val();
+
+	if (password == "" && confirmPassword == "") {
+		$("#checkPasswordMatch").html("");
+		$("#updateUserInfoButton").prop('disabled', false);
+	} else {
+		if (password != confirmPassword) {
+			$("#checkPasswordMatch").html("Passwords do not match!");
+			$("#updateUserInfoButton").prop('disabled', true);
+		} else {			
+			$("#updateUserInfoButton").prop('disabled', false);
+			$("#checkPasswordMatch").html("");
+		}
+	}
+}
+
 $(document).ready(function(){
 	$(".cartItemQty").on('change', function(){
 		var id=this.id;
 		$('#update-item-'+id).css('display', 'inline-block');
 	});
+	$(".billingAddress").prop("disabled", true);
 	$("#theSameAsShippingAddress").on('click', checkBillingAddress);
+	$("#txtConfirmPassword").keyup(checkPasswordMatch);
+	$("#txtNewPassword").keyup(checkPasswordMatch);
+
 });
+

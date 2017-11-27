@@ -3,13 +3,12 @@
 <head>
 
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-<link rel="stylesheet" th:href="@{/css/non-responsive.css}" />
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
 
 <!-- Custom styles for this template -->
-<link th:href="@{/css/style.css}" rel="stylesheet" />
+<link href="/css/style.css" rel="stylesheet" />
 
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css" />
 <style>
 	table {
 		border-collapse : collapse;
@@ -25,11 +24,11 @@
 </style>
 </head>
 <body>
-	<h2>Hello <span th:text="${user.firstName}+' '+${user.lastName}">,</span></h2>
-	<br/>
+	<h2>Hello <span th:text="${user.firstname}+' '+${user.lastname}"></span>,</h2>
+
 	<p>Thank you for shopping from our bookstore. We hope you had a good time with our service!</p>
 	<p>Your order number is: <strong>#<span th:text="${order.id}"></span></strong>. Here is your order detail:</p>
-	<br/>
+
 	<h2>Order Details</h2>
 	<hr/>
 	<p>Order details for purchase #<span th:text="${order.id}"></span></p>
@@ -42,23 +41,22 @@
 		</tr>
 		<tr>
 			<td>
-				<span th:text="${order.billingAddressName}"></span><br/>
-				<span th:text="${order.billingAddressStreet1}+' '+${order.billingAddressStreet2}"></span>
-				<span th:text="${order.billingAddressCity}+', '+${order.billingAddressState}+' '+${order.billingAddressZipcode}"></span>
-				<span th:text="${order.billingAddressCountry}"></span>
+				<span th:text="${order.billingAddress.billingAddressName}"></span><br/>
+				<span th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}"></span><br/>
+				<span th:text="${order.billingAddress.billingAddressCity}+', '+${order.billingAddress.billingAddressState}+' '+${order.billingAddress.billingAddressZipcode}"></span><br/>
+				<span th:text="${order.billingAddress.billingAddressCountry}"></span>
 			</td>
 			<td>
 				<span th:text="${order.payment.holderName}"></span><br/>
-				<span th:text="${order.payment.cardName}"></span><br/>
+				<span th:text="${order.payment.cardNumber}"></span><br/>
 				<span th:text="${order.payment.type}"></span><br/>
-				<span th:text="${order.payment.expiryMonth}"></span><br/>
-				<span th:text="${order.payment.expiryYear}"></span><br/>
+				<span th:text="${order.payment.expiryMonth}+', '+${order.payment.expiryYear}"></span><br/>
 			</td>
 			<td>
-				<span th:text="${order.shippingAddressName}"></span><br/>
-				<span th:text="${order.shippingAddressStreet1}+' '+${order.shippingAddressStreet2}"></span>
-				<span th:text="${order.shippingAddressCity}+', '+${order.shippingAddressState}+' '+${order.shippingAddressZipcode}"></span>
-				<span th:text="${order.shippingAddressCountry}"></span>
+				<span th:text="${order.shippingAddress.shippingAddressName}"></span><br/>
+				<span th:text="${order.shippingAddress.shippingAddressStreet1}+' '+${order.shippingAddress.shippingAddressStreet2}"></span><br/>
+				<span th:text="${order.shippingAddress.shippingAddressCity}+', '+${order.shippingAddress.shippingAddressState}+' '+${order.shippingAddress.shippingAddressZipcode}"></span><br/>
+				<span th:text="${order.shippingAddress.shippingAddressCountry}"></span>
 			</td>
 		</tr>
 	</table>
@@ -75,16 +73,16 @@
 		</thead>
 		<tbody>
 			<tr th:each="cartItem : ${cartItemList}">
-				<td><span data-th-text="#{cartItem.book.title}"></span></td>
-				<td class="text-center" data-th-text="#{cartItem.book.ourPrice}"></td>
-				<td class="text-center" data-th-text="#{cartItem.book.qty}"></td>
-				<td class="text-right" data-th-text="#{cartItem.book.subTotal}"></td>
+				<td><span data-th-text="${cartItem.book.title}"></span></td>
+				<td class="text-center" data-th-text="${cartItem.book.ourPrice}"></td>
+				<td class="text-center" data-th-text="${cartItem.qty}"></td>
+				<td class="text-right" data-th-text="${cartItem.subTotal}"></td>
 			</tr>
 			<tr>
 				<td class="highrow"></td>
 				<td class="highrow"></td>
 				<td class="highrow text-center"><strong>Subtotal</strong></td>
-				<td class="highrow text-right" data-th-text="#{order.orderTotal}"></td>
+				<td class="highrow text-right" data-th-text="${order.orderTotal}"></td>
 			</tr>
 			<tr>
 				<td class="emptyRow"></td>
@@ -96,7 +94,7 @@
 				<td class="emptyRow"><i class="fa fa-barcode iconbig"></i></td>
 				<td class="emptyRow"></td>
 				<td class="emptyRow text-center"><strong>Total</strong></td>
-				<td class="emptyRow text-right" data-th-text="${#numbers.formatDecimal(order.orderTotal*0.075, 0, 2)}"></td>
+				<td class="emptyRow text-right" data-th-text="${#numbers.formatDecimal(order.orderTotal*0.075, 0, 2)}+${order.orderTotal}"></td>
 			</tr>
 		</tbody>
 	</table>

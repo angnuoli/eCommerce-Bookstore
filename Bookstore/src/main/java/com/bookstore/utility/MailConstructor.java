@@ -2,7 +2,6 @@ package com.bookstore.utility;
 
 import java.util.Locale;
 
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,7 @@ public class MailConstructor {
 		Context context = new Context();
 		context.setVariable("order", order);
 		context.setVariable("user", user);
-		context.setVariable("cartItem", order.getCartItemList());
+		context.setVariable("cartItemList", order.getCartItemList());
 		String text = templateEngine.process("orderConfirmationEmailTemplate", context);
 		
 		MimeMessagePreparator messagePreparator = new MimeMessagePreparator() {
@@ -58,7 +57,7 @@ public class MailConstructor {
 				email.setTo(user.getEmail());
 				email.setSubject("Order Confirmaiton - "+order.getId());
 				email.setText(text, true);
-				email.setFrom(new InternetAddress("angnuoli@gmail.com"));
+				email.setFrom(env.getProperty("support.email"));
 			}
 		};
 		
