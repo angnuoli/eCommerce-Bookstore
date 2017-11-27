@@ -113,6 +113,127 @@
 							<div class="panel panel-default" style="border:none">
 								<div class="panel-body" style="background-color: #ededed; margin-top: 20px;">
 									
+									<table class="table table-sm table-inverse">
+										<thead>
+											<tr>Order Date</tr>
+											<tr>Order Number</tr>
+											<tr>Order Total</tr>
+											<tr>Order Status</tr>
+										</thead>
+										<tbody>
+											<tr th:each="${order: ${orderList}}">
+												<td><a th:href="@{orderDetail(id=${order.id})"><span th:text="${order.orderDate}"></span></a></td>
+												<td data-th-text="${order.id}"></td>
+												<td data-th-text="${order.orderTotal}"></td>
+												<td data-th-text="${order.orderStatus}"></td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div th:if="${displayOrderDetail}">
+										<div class="row">
+											<div class="col-xs-12">
+												<div class="text-center">
+													<h2>Order Detail for Purchase #<span th:text="${order.id}"></span></h2>
+												</div>
+												<hr/>
+
+												<div class="row">
+													<div class="col-xs-4">
+														<div class="panel panel-default height">
+															<div class="panel-heading"><strong>
+																Billing Details
+															</strong></div>
+															<div class="panel-body">
+																<span th:text="${order.billingAddress.billingAddressName}"></span><br/>
+																<span th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}"></span><br/>
+																<span th:text="${order.billingAddress.billingAddressCity}+', '+${order.billingAddress.billingAddressState}+${order.billingAddress.billingAddressZipcode}"></span><br/>
+																<span th:text="${order.billingAddress.billingAddressCountry}"></span><br/>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-xs-4">
+														<div class="panel panel-default height">
+															<div class="panel-heading"><strong>
+																Payment Information
+															</strong></div>
+															<div class="panel-body">
+																<span th:text="${order.payment.holderName}">Card Name</span><br/>
+																<span th:text="${order.payment.cardNumber}">Card Number</span><br/>
+																<span>Exp Date: </span><span th:text="${order.payment.expiryMonth}"></span><span th:text="${order.payment.expiryYear}"></span><br/>																
+															</div>
+														</div>
+													</div>
+
+													<div class="col-xs-4">
+														<div class="panel panel-default height">
+															<div class="panel-heading"><strong>
+																Shipping Details
+															</strong></div>
+															<div class="panel-body">
+																<span th:text="${order.shippingAddress.shippingAddressName}"></span><br/>
+																<span th:text="${order.shippingAddress.shippingAddressStreet1}+' '+${order.shippingAddress.shippingAddressStreet2}"></span><br/>
+																<span th:text="${order.shippingAddress.shippingAddressCity}+', '+${order.shippingAddress.shippingAddressState}+${order.shippingAddress.shippingAddressZipcode}"></span><br/>
+																<span th:text="${order.shippingAddress.shippingAddressCountry}"></span><br/>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-md-12">
+												<div class="panel-heading">
+													<h3 class="text-center"><strong>Order Summary</strong></h3>
+												</div>
+
+												<div class="panel-body">
+													<div class="table-responsive">
+														<table class="table table-condensed">
+															<thead>
+																<tr>
+																	<td><strong>Item Name</strong></td>
+																	<td class="text-center"><strong>Item Price</strong></td>
+																	<td class="text-center"><strong>Item Quantity</strong></td>
+																	<td class="text-right"><strong>Item Total</strong></td>
+																</tr>
+															</thead>
+															<tbody>
+																<tr th:each="cartItem : ${cartItemList}">
+																	<td data-th-text="${cartItem.book.title}"></td>
+																	<td class="text-center" data-th-text="${cartItem.book.ourPrice}"></td>
+																	<td class="text-center" data-th-text="${cartItem.book.qty}"></td>
+																	<td class="text-right" data-th-text="${cartItem.book.subTotal}"></td>
+																</tr>
+																<tr>
+																	<td class="highrow"></td>
+																	<td class="highrow"></td>
+																	<td class="highrow text-center"><strong>Subtotal</strong></td>
+																	<td class="highrow text-right" data-th-text="${order.orderTotal}"></td>
+																</tr>
+																<tr>
+																	<td class="emptyRow"></td>
+																	<td class="emptyRow"></td>
+																	<td class="emptyRow text-center"><strong>Tax</strong></td>
+																	<td class="emptyRow text-right" data-th-text="${#numbers.formatDecimal(order.orderTotal*0.075, 0, 2)}"></td>
+																</tr>
+																<tr>
+																	<td class="emptyRow"><i class="fa fa-barcode iconbig"></i></td>
+																	<td class="emptyRow"></td>
+																	<td class="emptyRow text-center"><strong>Total</strong></td>
+																	<td class="emptyRow text-right" data-th-text="${#numbers.formatDecimal(order.orderTotal*0.075, 0, 2)}+${order.orderTotal}"></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
 								</div>
 							</div>
 						</div>
