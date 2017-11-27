@@ -37,11 +37,10 @@ public class OrderServiceImpl implements OrderService{
 		order.setBillingAddress(billingAddress);
 		order.setShippingAddress(shippingAddress);
 		order.setShippingMethod(shippingMethod);
-		order.setOrderStatus("created");
 		order.setPayment(payment);
 		
 		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
-		
+				
 		for(CartItem cartItem : cartItemList) {
 			Book book = cartItem.getBook();
 			cartItem.setOrder(order);
@@ -55,6 +54,7 @@ public class OrderServiceImpl implements OrderService{
 		billingAddress.setOrder(order);
 		payment.setOrder(order);
 		order.setUser(user);
+		order.setOrderStatus("created");
 		order = orderRepository.save(order);
 		
 		return order;
@@ -62,5 +62,9 @@ public class OrderServiceImpl implements OrderService{
 	
 	public Order findOne(Long id) {
 		return orderRepository.findOne(id);
+	}
+	
+	public Order save(Order order) {
+		return orderRepository.save(order);
 	}
 }
