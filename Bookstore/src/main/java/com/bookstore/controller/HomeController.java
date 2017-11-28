@@ -127,7 +127,7 @@ public class HomeController {
 		user.setPassword(encryptedPassword);
 		
 		Role role = new Role();
-		role.setRoleId(1);
+		role.setId(1);
 		role.setName("ROLE_USER");
 		Set<UserRole> userRoles = new HashSet<>();
 		userRoles.add(new UserRole(user, role));
@@ -627,7 +627,7 @@ public class HomeController {
 		user.setPassword(encryptedPassword);
 		
 		Role role = new Role();
-		role.setRoleId(1);
+		role.setId(1);
 		role.setName("ROLE_USER");
 		Set<UserRole> userRoles = new HashSet<>();
 		userRoles.add(new UserRole(user, role));

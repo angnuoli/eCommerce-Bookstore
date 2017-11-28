@@ -34,7 +34,7 @@ public class BookstoreApplication implements CommandLineRunner{
 		user1.setEmail("angnuoli@gmail.com");
 		Set<UserRole> userRoles = new HashSet<>();
 		Role role1 = new Role();
-		role1.setRoleId(1);
+		role1.setId(1);
 		role1.setName("ROLE_USER");
 		userRoles.add(new UserRole(user1, role1));
 		

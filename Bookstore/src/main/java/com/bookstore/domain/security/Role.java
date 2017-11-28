@@ -13,18 +13,18 @@ import javax.persistence.OneToMany;
 public class Role {
 	
 	@Id
-	private int roleId;
+	private int id;
 	private String name;
 	
 	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private Set<UserRole> userRoles = new HashSet<>();
 
-	public int getRoleId() {
-		return roleId;
+	public int getId() {
+		return id;
 	}
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
