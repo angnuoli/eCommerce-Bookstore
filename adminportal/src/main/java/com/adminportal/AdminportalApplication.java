@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.env.Environment;
 
 import com.adminportal.domain.User;
 import com.adminportal.domain.security.Role;
@@ -19,23 +20,26 @@ public class AdminportalApplication implements CommandLineRunner {
 
 	@Autowired
 	private UserService userService;
-	
+
+	@Autowired
+	private Environment environment;
+
 	public static void main(String[] args) {
 		SpringApplication.run(AdminportalApplication.class, args);
 	}
-	
+
 	@Override
-	public void run(String... args) throws Exception{
+	public void run(String... args) throws Exception {
 		User user1 = new User();
-		user1.setUsername("admin");
-		user1.setPassword(SecurityUtility.passwordEncoder().encode("admin"));
-		user1.setEmail("admin@gmail.com");
+		user1.setUsername(environment.getProperty("admin.username"));
+		user1.setPassword(SecurityUtility.passwordEncoder().encode(environment.getProperty("admin.password")));
+		user1.setEmail(environment.getProperty("admin.email"));
 		Set<UserRole> userRoles = new HashSet<>();
 		Role role1 = new Role();
-		role1.setId(0);
+		role1.setId((long)0);
 		role1.setName("ROLE_ADMIN");
 		userRoles.add(new UserRole(user1, role1));
-		
+
 		userService.createUser(user1, userRoles);
 	}
 }

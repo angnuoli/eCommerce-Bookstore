@@ -3,22 +3,28 @@ package com.bookstore.utility;
 import java.security.SecureRandom;
 import java.util.Random;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.bookstore.config.DataLoader;
+
 @Component
 public class SecurityUtility {
-	private static final String SALT = "salt"; // Sal should be protected carefully
+	private static ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/config/application-context.xml");
+	
+	private static final byte[] SALT = context.getBean("dataLoader", DataLoader.class).getSalt(); // Salt should be protected carefully
 	
 	@Bean
 	public static BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(12, new SecureRandom(SALT.getBytes()));
+		return new BCryptPasswordEncoder(12, new SecureRandom(SALT));
 	}
 	
 	@Bean
 	public static String randomPassword() {
-		String SALTCHARS = "ABCEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		String SALTCHARS = "ABCEFGHIJKLMNOPQRSTUVWXYZ1234567890abcefghijklmnopqrstuvwxyz";
 		StringBuilder salt = new StringBuilder();
 		Random rnd = new Random();
 		

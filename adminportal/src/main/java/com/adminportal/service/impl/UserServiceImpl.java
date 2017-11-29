@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService{
 			localUser = userRepository.save(user);
 		}
 		
+		localUser = userRepository.findByUsername(user.getUsername());
 		return localUser;
 	} 
 	

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.env.Environment;
 
 import com.bookstore.domain.User;
 import com.bookstore.domain.security.Role;
@@ -20,6 +21,9 @@ public class BookstoreApplication implements CommandLineRunner{
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private Environment env;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
@@ -28,13 +32,13 @@ public class BookstoreApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		User user1 = new User();
 		user1.setFirstname("John");
-		user1.setLastname("Lu");
-		user1.setUsername("hero");
-		user1.setPassword(SecurityUtility.passwordEncoder().encode("EL"));
-		user1.setEmail("angnuoli@gmail.com");
+		user1.setLastname("Ge");
+		user1.setUsername(env.getProperty("user.username"));
+		user1.setPassword(SecurityUtility.passwordEncoder().encode(env.getProperty("user.password")));
+		user1.setEmail(env.getProperty("user.email"));
 		Set<UserRole> userRoles = new HashSet<>();
 		Role role1 = new Role();
-		role1.setId(1);
+		role1.setId((long) 1);
 		role1.setName("ROLE_USER");
 		userRoles.add(new UserRole(user1, role1));
 		
