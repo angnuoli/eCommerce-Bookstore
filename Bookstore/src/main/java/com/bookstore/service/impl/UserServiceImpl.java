@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService{
 			LOG.info("User already exists. Nothing will be done.", user.getUsername());
 		} else {
 			for (UserRole ur : userRoles) {
-				if (roleRepository.findOne((long) ur.getRole().getId()) == null) {
+				if (roleRepository.findOne(ur.getRole().getId()) == null) {
 					roleRepository.save(ur.getRole());
 				}
 			}
