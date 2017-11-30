@@ -1,12 +1,14 @@
 # eCommerce-Bookstore
 
-Extend Bookstore-Information-Management-System project. Build a true Bookstore eCommerce Website using Spring Framework, Hibernate, Thymeleaf &amp; MySql.
+Build a eCommerce Bookstore Website using Spring Framework, Hibernate, Thymeleaf &amp; MySql.
 
-Bookstore project is for customer and adminportal project is for admin.
+Bookstore module is for customer and adminportal module is for admin.
 
 Now, let's take a look at different operations.
 
 # Customer side (Bookstore)
+
+**A demo of the bookstore module is running [here](https://ecommerce-bookstore.herokuapp.com/).**
 
 Services provided by bookstore front-end part for customers are as following:
 
@@ -22,7 +24,7 @@ Customer can use an email to create a new account, the password will be sent dir
 
 Duplicate username or email is not allowed.
 
-View a demo on youtube <a href="http://www.youtube.com/watch?v=QlF81-6gLG0" target="_blank">⤵️</a>
+View a demo video on youtube <a href="http://www.youtube.com/watch?v=QlF81-6gLG0" target="_blank">⤵️</a>
 
 <kbd><a href="http://www.youtube.com/watch?v=QlF81-6gLG0" target="_blank"><img src="https://i9.ytimg.com/vi/QlF81-6gLG0/maxresdefault.jpg?sqp=CNiC_NAF&rs=AOn4CLCyXwmPUzOT846z96XaGMc41bmw7g"
 	alt="IMAGE ALT TEXT HERE" width="640" border="10" style="box-shadow: 2px 1px 3px #545454;" /></a></kbd>
