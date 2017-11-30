@@ -15,7 +15,6 @@ Services provided by bookstore front-end part for customers are as following:
 1. sign in / sign up / reset password
 2. shop / checkout
 
-
 <kbd><img src="https://drive.google.com/uc?id=1yV5VACUn1-xXZoiw_Y9yb8VbTtYs9691" width="640" style="border: 0px solid black;box-shadow: 2px 1px 3px #545454" /></kbd>
 
 ## 1. Create a new customer account
@@ -26,5 +25,4 @@ Duplicate username or email is not allowed.
 
 View a demo video on youtube <a href="http://www.youtube.com/watch?v=QlF81-6gLG0" target="_blank">⤵️</a>
 
-<kbd><a href="http://www.youtube.com/watch?v=QlF81-6gLG0" target="_blank"><img src="https://i9.ytimg.com/vi/QlF81-6gLG0/maxresdefault.jpg?sqp=CNiC_NAF&rs=AOn4CLCyXwmPUzOT846z96XaGMc41bmw7g"
-	alt="IMAGE ALT TEXT HERE" width="640" border="10" style="box-shadow: 2px 1px 3px #545454;" /></a></kbd>
+<kbd><a href="http://www.youtube.com/watch?v=QlF81-6gLG0" target="_blank"><img src="https://drive.google.com/uc?id=192_WGq140rIcBs5jUVA0e6NMUgeLH8gB" alt="Oops, Image Lost. Click to See Video Demo on YouTube" width="640" border="10" style="box-shadow: 2px 1px 3px #545454;" /></a></kbd>
