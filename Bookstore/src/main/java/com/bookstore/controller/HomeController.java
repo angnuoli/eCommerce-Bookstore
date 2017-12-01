@@ -188,6 +188,9 @@ public class HomeController {
 		}
 		
 		model.addAttribute("classActiveEdit", true);
+		model.addAttribute("orderList", user.getOrderList());
+		model.addAttribute("listOfCreditCards", true);
+		model.addAttribute("listOfShippingAddresses", true);
 		
 		/*Check email already exists*/
 		if (userService.findByEmail(user.getEmail()) != null) {
