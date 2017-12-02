@@ -47,7 +47,7 @@
 									<div class="row">
 										<div class="col-xs-6">
 											<h4>Our Price: <span style="color: #db3208;">$</span><span th:text="${book.ourPrice}"></span></h4>
-											<p>List Price: <span style="text-decoration: line-through;">$</span><span th:text="${book.listPrice}"></span></p>
+											<p>List Price: <span class="delete-price">$<span th:text="${book.listPrice}"></span></span></p>
 											<p>You save: $<span th:text="${#numbers.formatDecimal((book.listPrice - book.ourPrice), 0, 'COMMA', 2, 'POINT')}"></span></p>
 											<span>Qty: </span>
 											<select name="qty" id="">

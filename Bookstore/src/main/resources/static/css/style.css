@@ -61,3 +61,28 @@ hr {
 	 overflow: hidden;
 }
 
+.a-row {
+	width: 100%;
+}
+.a-spacing-none {
+	margin: 0;
+	word-wrap: break-word;
+}
+
+.a-spacing-bottom-small {
+	margin-bottom: .4rem!important;
+}
+
+.a-spacing-top-small {
+	margin-top: .4rem!important;
+}
+
+.a-size-small {
+	font-size: 1.3rem!important;
+  line-height: 1.4!important;
+}
+
+.delete-price {
+	color: gray;
+	text-decoration: line-through;
+}
