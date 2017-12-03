@@ -11,7 +11,7 @@
 				<fieldset>
 					<legend class="center-block">Update Book Information <span style="font-size: small; color: red;">(* is a required field)</span></legend>
 					
-					<input hidden="hidden" name="id" th:value="${book.id}" />;
+					<input hidden="hidden" name="id" th:value="${book.id}" />
 					
 					<!-- title -->
 
@@ -174,11 +174,11 @@
 					  <label class="col-md-2 control-label" for="status">* Status</label>
 					  <div class="col-md-8">
 				  		<label>
-				  			<input type="radio" value="true" name="active" checked="checked" /> 
+				  			<input type="radio" value="true" name="active" th:checked="${book.active}" /> 
 				  			Active
 				  		</label>
 				  		<label>
-				  			<input type="radio" value="false" name="active"  /> 
+				  			<input type="radio" value="false" name="active" th:checked="${!book.active}" /> 
 				  			Inactive
 				  		</label>
 					  	<span class="help-block">Whether the book is active or inactive</span>
