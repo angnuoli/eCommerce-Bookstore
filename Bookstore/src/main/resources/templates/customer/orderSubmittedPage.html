@@ -43,14 +43,14 @@
 					<div class="col-xs-2">
 						<a th:href="@{/bookDetail(id=${cartItem.book.id})}"> <img
 							class="img-responsive"
-							th:src="#{adminPath}+@{/image/book/}+${cartItem.book.id}+'.png'"
+							th:src="@{/image/book/}+${cartItem.book.id}+'.png'"
 							style="width: 70px;" />
 						</a>
 					</div>
 
 					<div class="col-xs-6">
-						<a th:href="@{/bookDetail?id=} + ${cartItem.book.id}"><h4
-								th:text="${cartItem.book.title}"></h4></a>
+						<a th:href="@{/bookDetail?id=} + ${cartItem.book.id}">
+						<h4 th:text="${cartItem.book.title}"></h4></a>
 					</div>
 
 					<div class="col-xs-2">

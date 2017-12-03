@@ -2,6 +2,7 @@ package com.bookstore.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,7 +17,8 @@ import com.bookstore.utility.SecurityUtility;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@Order(1)
+public class SecurityConfigAdmin extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserSecurityService userSecurityService;
 	
@@ -39,27 +41,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/hours",
 			"/faq",
 			"/searchByCategory",
-			"/searchBook"
+			"/searchBook",
+			"/adminportal/login"
 	};
 	
 	@Override 
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.authorizeRequests().
-			/*antMatchers("/**")*/
-			antMatchers(PUBLIC_MATCHERS).
-			permitAll().anyRequest().authenticated();
+			.authorizeRequests()
+				.antMatchers(PUBLIC_MATCHERS)
+					.permitAll().anyRequest().authenticated();
 		
 		http
-			.csrf().disable().cors().disable()
-			.formLogin().failureUrl("/login?error")
-			/*.defaultSuccessUrl("/")*/
-			.loginPage("/login").permitAll()
+			.antMatcher("/adminportal/**")
+			.authorizeRequests()
+			.anyRequest()
+			.hasAuthority("ROLE_ADMIN")
 			.and()
-			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
-			.and()
-			.rememberMe();
+			.formLogin()
+				.failureUrl("/adminportal/login?error")
+				.loginPage("/adminportal/login")
+				.defaultSuccessUrl("/adminportal/")
+				.and()
+			.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
+				.and()
+			.rememberMe()
+				.and()
+			.csrf().disable().cors().disable();
 	}
 	
 	@Autowired

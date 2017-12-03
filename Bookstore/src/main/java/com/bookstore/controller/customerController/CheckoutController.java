@@ -1,4 +1,4 @@
-package com.bookstore.controller;
+package com.bookstore.controller.customerController;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -39,7 +39,9 @@ import com.bookstore.utility.USConstants;
 
 @Controller
 public class CheckoutController {
-
+	
+	private static String templatePath = "customer/";
+	
 	@Autowired
 	private UserService userService;
 
@@ -148,13 +150,13 @@ public class CheckoutController {
 			model.addAttribute("missingRequiredField", true);
 		}
 
-		return "checkout";
+		return templatePath + "checkout";
 
 	}
 
 	@RequestMapping("/orderHistory")
 	public String orderHistory(Model model) {
-		return "/myPorfile";
+		return templatePath + "/myPorfile";
 	}
 
 	@RequestMapping("/submitOrder")
@@ -225,7 +227,7 @@ public class CheckoutController {
 		orderService.save(order);
 		model.addAttribute("order", order);
 
-		return "orderSubmittedPage";
+		return templatePath + "orderSubmittedPage";
 	}
 
 	@RequestMapping("/setShippingAddress")
@@ -267,7 +269,7 @@ public class CheckoutController {
 
 			model.addAttribute("classActiveShipping", true);
 
-			return "checkout";
+			return templatePath + "checkout";
 		}
 	}
 
@@ -313,7 +315,7 @@ public class CheckoutController {
 
 			model.addAttribute("classActivePayment", true);
 
-			return "checkout";
+			return templatePath + "checkout";
 		}
 	}
 }

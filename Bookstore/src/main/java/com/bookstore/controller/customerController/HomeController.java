@@ -1,4 +1,4 @@
-package com.bookstore.controller;
+package com.bookstore.controller.customerController;
 
 import java.security.Principal;
 import java.util.Arrays;
@@ -50,7 +50,9 @@ import com.bookstore.utility.USConstants;
 
 @Controller
 public class HomeController {
-
+	
+	private static String templatePath = "customer/";
+	
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -81,28 +83,28 @@ public class HomeController {
 	/* Main page */
 	@RequestMapping("/")
 	public String index() {
-		return "index";
+		return templatePath + "index";
 	}
 
 	@RequestMapping("/signUp")
 	public String signUp(Model model) {
 		model.addAttribute("classActiveNewAccount", true);
-		return "myAccount";
+		return templatePath + "myAccount";
 	}
 
 	@RequestMapping("/myAccount")
 	public String myAccount() {
-		return "myAccount";
+		return templatePath + "myAccount";
 	}
 	
 	@RequestMapping("/hours")
 	public String hours(Model model) {
-		return "hours";
+		return templatePath + "hours";
 	}
 	
 	@RequestMapping("/faq")
 	public String faq(Model model) {
-		return "faq";
+		return templatePath + "faq";
 	}
 
 	@RequestMapping(value = "/newUser", method = RequestMethod.POST)
@@ -115,13 +117,13 @@ public class HomeController {
 		if (userService.findByUsername(username) != null) {
 			model.addAttribute("userNameExists", true);
 			// throw new Exception("Username already exists, nothing will be done");
-			return "myAccount";
+			return templatePath + "myAccount";
 		}
 
 		if (userService.findByEmail(userEmail) != null) {
 			model.addAttribute("emailExists", true);
 			// throw new Exception("Email already exists, nothin will be done");
-			return "myAccount";
+			return templatePath + "myAccount";
 		}
 
 		User user = new User();
@@ -152,7 +154,7 @@ public class HomeController {
 
 		model.addAttribute("emailSent", true);
 
-		return "myAccount";
+		return templatePath + "myAccount";
 	}
 
 	@RequestMapping("/newUser")
@@ -178,7 +180,7 @@ public class HomeController {
 		model.addAttribute("user", user);
 
 		model.addAttribute("classActiveEdit", true);
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	@RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
@@ -199,7 +201,7 @@ public class HomeController {
 		if (userService.findByEmail(user.getEmail()) != null) {
 			if (userService.findByEmail(user.getEmail()).getId() != currentUser.getId()) {
 				model.addAttribute("emailExists", true);
-				return "myProfile";
+				return templatePath + "myProfile";
 			}
 		}
 
@@ -207,7 +209,7 @@ public class HomeController {
 		if (userService.findByUsername(user.getUsername()) != null) {
 			if (userService.findByUsername(user.getUsername()).getId() != currentUser.getId()) {
 				model.addAttribute("usernameExists", true);
-				return "myProfile";
+				return templatePath + "myProfile";
 			}
 		}
 
@@ -220,7 +222,7 @@ public class HomeController {
 			} else {
 				model.addAttribute("incorrectPassword", true);
 
-				return "myProfile";
+				return templatePath + "myProfile";
 			}
 		}
 
@@ -240,7 +242,7 @@ public class HomeController {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	@RequestMapping("/orderDetail")
@@ -274,7 +276,7 @@ public class HomeController {
 
 		}
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	/* Credit Card */
@@ -289,7 +291,7 @@ public class HomeController {
 		model.addAttribute("classActiveBilling", true);
 		model.addAttribute("listOfShippingAddresses", true);
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	/* Add new credit card */
@@ -316,7 +318,7 @@ public class HomeController {
 		model.addAttribute("userShippingList", user.getUserShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	@RequestMapping(value = "/addNewCreditCard", method = RequestMethod.POST)
@@ -335,7 +337,7 @@ public class HomeController {
 		model.addAttribute("classActiveBilling", true);
 		model.addAttribute("listOfShippingAddresses", true);
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	/* Update credit card info */
@@ -365,7 +367,7 @@ public class HomeController {
 			model.addAttribute("orderList", user.getOrderList());
 		}
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	/* Remove credit card */
@@ -389,7 +391,7 @@ public class HomeController {
 			model.addAttribute("orderList", user.getOrderList());
 		}
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	/* Set default credit card */
@@ -408,7 +410,7 @@ public class HomeController {
 		model.addAttribute("userShippingList", user.getUserShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	/* Shipping address control */
@@ -425,7 +427,7 @@ public class HomeController {
 		model.addAttribute("classActiveShipping", true);
 		model.addAttribute("listOfShippingAddresses", true);
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	@RequestMapping("/addNewShippingAddress")
@@ -455,7 +457,7 @@ public class HomeController {
 		model.addAttribute("userShippingList", user.getUserShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	@RequestMapping(value = "/addNewShippingAddress", method = RequestMethod.POST)
@@ -474,7 +476,7 @@ public class HomeController {
 		model.addAttribute("classActiveShipping", true);
 		model.addAttribute("listOfShippingAddresses", true);
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	/* Update credit card info */
@@ -502,7 +504,7 @@ public class HomeController {
 			model.addAttribute("orderList", user.getOrderList());
 		}
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	/* Set default shipping address */
@@ -522,7 +524,7 @@ public class HomeController {
 		model.addAttribute("userShippingList", user.getUserShippingList());
 		model.addAttribute("orderList", user.getOrderList());
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	/* Remove shipping address */
@@ -546,7 +548,7 @@ public class HomeController {
 			model.addAttribute("orderList", user.getOrderList());
 		}
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	@RequestMapping("/myProfile")
@@ -569,13 +571,13 @@ public class HomeController {
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("classActiveEdit", true);
 
-		return "myProfile";
+		return templatePath + "myProfile";
 	}
 
 	@RequestMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("classActiveLogin", true);
-		return "myAccount";
+		return templatePath + "myAccount";
 	}
 
 	@RequestMapping("/forgetPassword")
@@ -588,7 +590,7 @@ public class HomeController {
 		if (user == null) {
 			model.addAttribute("emailNotExist", true);
 			// throw new Exception("Email already exists, nothin will be done");
-			return "myAccount";
+			return templatePath + "myAccount";
 		}
 
 		String password = SecurityUtility.randomPassword();
@@ -615,7 +617,7 @@ public class HomeController {
 
 		model.addAttribute("forgetPasswordEmailSent", true);
 
-		return "myAccount";
+		return templatePath + "myAccount";
 	}
 
 	@RequestMapping("/bookshelf")
@@ -631,7 +633,7 @@ public class HomeController {
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("activeAll", true);
 
-		return "bookshelf";
+		return templatePath + "bookshelf";
 	}
 
 	@RequestMapping("/bookDetail")
@@ -650,6 +652,6 @@ public class HomeController {
 		model.addAttribute("qtyList", qtyList);
 		model.addAttribute("qty", 1);
 
-		return "bookDetail";
+		return templatePath + "bookDetail";
 	}
 }

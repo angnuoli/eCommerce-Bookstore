@@ -63,7 +63,7 @@ h3 {
 								<div th:if="${book != null}">
 									<div class="row" style="margin-top: 32px;margin-bottom: 32px;">
 										<div class="col-xs-3">
-											<a th:href="@{/bookDetail?id=}+${book.id}"><img th:src="#{adminPath}+@{/image/book/}+${book.id}+'.png'" class="img-responsive shelf-book" style="" /></a>
+											<a th:href="@{/bookDetail?id=}+${book.id}"><img th:src="@{/image/book/}+${book.id}+'.png'" class="img-responsive shelf-book" style="" /></a>
 										</div>
 										<div class="col-xs-9">
 											<div class="a-row a-spacing-none">

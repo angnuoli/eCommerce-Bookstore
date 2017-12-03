@@ -1,9 +1,10 @@
-package com.bookstore.controller;
+package com.bookstore.controller.customerController;
 
 import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +24,8 @@ import com.bookstore.service.UserService;
 @RequestMapping("/shoppingCart")
 public class ShoppingCartController {
 
+	private static String templatePath = "customer/";
+	
 	@Autowired 
 	private UserService userService;
 	
@@ -47,7 +50,7 @@ public class ShoppingCartController {
 		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("shoppingCart", shoppingCart);
 		
-		return "shoppingCart";
+		return templatePath + "shoppingCart";
 	}
 	
 	@RequestMapping("/addItem")

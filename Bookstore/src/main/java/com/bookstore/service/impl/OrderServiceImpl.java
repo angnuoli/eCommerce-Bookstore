@@ -55,7 +55,6 @@ public class OrderServiceImpl implements OrderService{
 		payment.setOrder(order);
 		order.setUser(user);
 		order.setOrderStatus("created");
-		order = orderRepository.save(order);
 		
 		return order;
 	}

@@ -23,7 +23,7 @@
 			<div class="row" style="margin-top: 120px;">
 				<div class="col-xs-3">
 					<a th:href="@{/bookshelf}">Back to book list</a><br/>
-					<img th:src="#{adminPath}+@{/image/book/}+${book.id}+'.png'" alt="" class="img-responsive shelf-book" />
+					<img th:src="@{/image/book/}+${book.id}+'.png'" alt="" class="img-responsive shelf-book" />
 				</div>
 				<div class="col-xs-9">
 					<h3><span th:if="${addBookSuccess}" style="color: forestgreen"><i class="fa fa-check" aria-hidden="true" style="color: forestgreen"></i>Added to cart.</span></h3>

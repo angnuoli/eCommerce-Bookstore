@@ -1,4 +1,4 @@
-package com.bookstore.controller;
+package com.bookstore.controller.customerController;
 
 import java.security.Principal;
 import java.util.List;
@@ -17,6 +17,8 @@ import com.bookstore.service.UserService;
 
 @Controller
 public class SearchController {
+	
+	private static String templatePath = "customer/";
 	
 	@Autowired
 	private UserService userService;
@@ -44,12 +46,12 @@ public class SearchController {
 		
 		if (bookList.isEmpty()) {
 			model.addAttribute("emptyList", true);
-			return "bookshelf";
+			return templatePath + "bookshelf";
 		}
 		
 		model.addAttribute("bookList", bookList);
 		
-		return "bookshelf";
+		return templatePath + "bookshelf";
 	}
 	
 	@RequestMapping("searchBook")
@@ -67,11 +69,11 @@ public class SearchController {
 		
 		if (bookList.isEmpty()) {
 			model.addAttribute("emptyList", true);
-			return "bookshelf";
+			return templatePath + "bookshelf";
 		}
 		
 		model.addAttribute("bookList", bookList);
 		
-		return "bookshelf";
+		return templatePath + "bookshelf";
 	}
 }
