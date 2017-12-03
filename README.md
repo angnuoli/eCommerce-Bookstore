@@ -15,7 +15,7 @@ Services provided by bookstore front-end part for customers are as following:
 1. sign in / sign up / reset password
 2. shop / checkout
 
-<kbd><img src="https://drive.google.com/uc?id=1yV5VACUn1-xXZoiw_Y9yb8VbTtYs9691" width="640" style="border: 0px solid black;box-shadow: 2px 1px 3px #545454" /></kbd>
+<kbd><img src="https://drive.google.com/uc?id=1ID5LU_jUdhBaiELiHyM6cTNg3529ogC7" width="640" style="border: 0px solid black;box-shadow: 2px 1px 3px #545454" /></kbd>
 
 ## 1. Create a new customer account
 

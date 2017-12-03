@@ -117,7 +117,7 @@ h3 {
 	<script th:inline="javascript" th:src="@{/js/bookshelfScript.js}"></script>
 	<script th:inline="javascript">
 	//<![CDATA[
-	var length = /*[[${bookList.size()}]]*/
+	var length = /*[[${bookList==null?:bookList.size()}]]*/;
 		for (i = 1; i <= length; i++) {
 			if (document.querySelector('#bookAbbrDescription-' + i) != null && document.querySelector('#bookAbbrDescription-' + i).clientHeight >= document.querySelector('#bookAbbrDescription-' + i).scrollHeight) {
 				$('#bookAbbrDescriptionPlaceHolder-' + i).css('display', 'none');

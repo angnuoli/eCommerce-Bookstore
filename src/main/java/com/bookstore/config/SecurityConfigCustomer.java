@@ -17,8 +17,8 @@ import com.bookstore.utility.SecurityUtility;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Order(1)
-public class SecurityConfigAdmin extends WebSecurityConfigurerAdapter {
+@Order(2)
+public class SecurityConfigCustomer extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserSecurityService userSecurityService;
 	
@@ -41,8 +41,7 @@ public class SecurityConfigAdmin extends WebSecurityConfigurerAdapter {
 			"/hours",
 			"/faq",
 			"/searchByCategory",
-			"/searchBook",
-			"/adminportal/login"
+			"/searchBook"
 	};
 	
 	@Override 
@@ -53,23 +52,15 @@ public class SecurityConfigAdmin extends WebSecurityConfigurerAdapter {
 					.permitAll().anyRequest().authenticated();
 		
 		http
-			.antMatcher("/adminportal/**")
-			.authorizeRequests()
-			.anyRequest()
-			.hasAuthority("ROLE_ADMIN")
-			.and()
+			.csrf().disable().cors().disable()
 			.formLogin()
-				.failureUrl("/adminportal/login?error")
-				.loginPage("/adminportal/login")
-				.defaultSuccessUrl("/adminportal/")
+				.failureUrl("/login?error")
+				.defaultSuccessUrl("/")
+				.loginPage("/login")
 				.and()
 			.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
-				.and()
-			.rememberMe()
-				.and()
-			.csrf().disable().cors().disable();
+				.logoutSuccessUrl("/?logout").permitAll();
 	}
 	
 	@Autowired
