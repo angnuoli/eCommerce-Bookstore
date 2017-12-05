@@ -1,32 +1,16 @@
 //<![CDATA[ 
-
 function readMoreBookDescription(id) {
 	/* Read more description */
-
-	/*
-	 * document.querySelector('#bookAbbrDescription-'+id).style.maxHeight =
-	 * 'none'; var currentHeight =
-	 * document.querySelector('#bookAbbrDescription-'+id).clientHeight;
-	 * document.querySelector('#bookAbbrDescription-'+id).style.maxHeight =
-	 * '212px';
-	 */
-
 	$('#bookAbbrDescription-' + id).animate({
 		'maxHeight': document.querySelector('#bookAbbrDescription-' + id).scrollHeight
 	}, 200, 'linear');
-
-	console
-		.log(document.querySelector('#bookAbbrDescription-' + id).style.maxHeight);
 
 	$('#bdSeeAllPrompt-' + id).css('display', 'none')
 	$('#bdSeeLessPrompt-' + id).css('display', 'block');
 }
 
 function readLessBookDescription(id) {
-	/* Read more description */
-
-	var currentHeight = document.querySelector('#bookAbbrDescription-' + id).clientHeight;
-
+	/* Read less description */
 	$('#bookAbbrDescription-' + id).animate({
 		maxHeight: '212'
 	}, 200, 'linear');
@@ -47,13 +31,6 @@ $(document).ready(function() {
 
 	document.querySelector('.sorting_disabled').style.borderBottom = "none";
 	document.querySelector('.sorting_disabled').style.padding = "5px 0px";
-
-	$("#bookList").on('page.dt', function() {
-		$('html, body').animate({
-			scrollTop: $('#bookList').offset().top
-		}, 200);
-	});
-
 });
 
 $('.a-link-expander')
