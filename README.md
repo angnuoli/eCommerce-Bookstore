@@ -1,10 +1,10 @@
 # eCommerce-Bookstore
 
-**Alert: To run the bookstore project, you need to edit /src/main/resources/application.properties to set database connection, email sender and initial user/admin information (this will be used in BookstoreApplication.java).**
-
 Build a eCommerce Bookstore Website using Spring Framework, Hibernate, Thymeleaf &amp; MySql.
 
 Bookstore module is for customer and adminportal module is for admin.
+
+**Alert: To run the bookstore project, you need to edit /src/main/resources/application.properties to set database connection, email sender and initial user/admin information (this will be used in BookstoreApplication.java).**
 
 Now, let's take a look at different operations.
 
