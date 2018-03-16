@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header" />
+<style>
+th .sorting_disabled {
+	border-bottom: none;
+}
+
+h3 {
+	font-size: 21px!important;
+	margin: 0;
+	display: inline;
+}
+</style>
+<body>
+	<div th:replace="common/header :: common-navbar"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-8">
+				<h2 class="section-headline"><span th:text="${user}? 'Hi, ' + ${#strings.toUpperCase(user.username)} : 'All Books'"></span></h2>
+			</div>
+			<div class="col-xs-4" style="margin-bottom: -8%">
+				<img src="/image/logo.png" alt="" class="img-responsive" />
+			</div>
+		</div>
+		<!-- horizontal line and wood picture -->
+		<div th:replace="common/header :: frontpart-decoration"></div>
+		<div class="row" style="margin-top: 60px">
+			<div class="col-xs-3">
+				<h3><label for="category">Category</label></h3>
+				<div class="list-group" id="category">
+					<a th:href="@{/bookshelf(category='all')}" th:classappend="${activeAll} ? 'active'" class="list-group-item">All</a>
+					<a th:href="@{/searchByCategory(category='Management')}" th:classappend="${activeManagement} ? 'active'" class="list-group-item">Management</a>
+					<a th:href="@{/searchByCategory(category='Fiction')}" th:classappend="${activeFiction} ? 'active'" class="list-group-item">Fiction</a>
+					<a th:href="@{/searchByCategory(category='Engineering')}" th:classappend="${activeEngineering} ? 'active'" class="list-group-item">Engineering</a>
+					<a th:href="@{/searchByCategory(category='Programming')}" th:classappend="${activeProgramming} ? 'active'" class="list-group-item">Programming</a>
+					<a th:href="@{/searchByCategory(category='Arts &amp; Literature')}" th:classappend="${activeArtsLiterature} ? 'active'" class="list-group-item">Arts &amp; Literature</a>
+				</div>
+			</div>
+			<!-- Book list -->
+			<div class="col-xs-9">
+				<div th:if="${emptyList}">
+					<h5 style="font-style: italic;">Oops, no result is found, Try somthing else or try again later.</h5>
+				</div>
+				<table border="0" id="bookList">
+					<thead>
+						<tr>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="book-item" th:each="book : ${bookList}">
+							<td style="padding: 0;">
+								<hr style="margin-top: 0" />
+								<div th:if="${book != null}">
+									<div class="row" style="margin-top: 32px;margin-bottom: 32px;">
+										<div class="col-xs-3">
+											<a th:href="@{/bookDetail?id=}+${book.id}"><img th:src="@{/image/book/}+${book.id}+'.png'" class="img-responsive shelf-book" style="" /></a>
+										</div>
+										<div class="col-xs-9">
+											<div class="a-row a-spacing-none">
+												<a th:href="@{/bookDetail?id=}+${book.id}">
+													<h3><span th:text="${book.title}"></span></h3>
+													<span style="font-size: 13px;margin-left: 5px;" th:text="${book.publicationDate}"></span>
+												</a>
+											</div>
+											<div class="a-row a-spacing-bottom-small">
+												<span style="font-size: 13px;">by <span th:text="${book.author}"></span></span>
+											</div>
+											<div class="a-row a-spacing-top-small a-spacing-bottom-small">
+												<a style="font-size: 15px" th:href="@{/bookDetail?id=}+${book.id}"><span th:text="${#strings.capitalize(book.format)}"></span></a>
+											</div>
+											<div class="a-row a-spacing-top-small a-spacing-bottom-small">
+												<a th:href="@{/bookDetail?id=}+${book.id}"><span style="font-size: x-large; color: #db3208">$<span th:text="${#numbers.formatDecimal(book.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span></span></a>
+												<span class="delete-price">$<span th:text="${#numbers.formatDecimal(book.listPrice, 0, 'COMMA', 2, 'POINT')}"></span></span>
+											</div>
+											<div th:id="'bookAbbrDescription-'+${book.id}" class="bookAbbrDescription a-row a-spacing-top-small" style="overflow: hidden; z-index: 1; height: auto; max-height: 212px; display: block;">
+												<p style="margin-bottom: 0;" th:utext="${book.description}"></p>
+											</div>
+											<div th:id="'bookAbbrDescriptionPlaceHolder-'+${book.id}" style="height: 20px; display: none;">
+												<div style="z-index: 3;">
+													<a href="javascript:void(0);" th:id="'bookAbbrDescriptionPlaceHolder-'+${book.id}" class="a-link-expander h2-expander">
+												   		<span th:id="'bdSeeAllPrompt-'+${book.id}" style="display: block;"><i style="margin-right: 5px;" id="bdExpanderIcon" class="fa fa-caret-down" aria-hidden="true"></i>Read more</span>
+												   		<span th:id="'bdSeeLessPrompt-'+${book.id}" style="display: none;"><i style="margin-right: 5px;" id="bdExpanderIcon" class="fa fa-caret-up" aria-hidden="true"></i>Read less</span>
+											   		</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- container -->
+	<!-- footer -->
+	<div th:replace="common/header :: footer"></div>
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+	<script th:inline="javascript" th:src="@{/js/bookshelfScript.js}"></script>
+	<script th:inline="javascript">
+	//<![CDATA[
+	function hideReadMore() {
+		var length = /*[[${bookList.size()}]]*/ ;
+		for (i = 1; i <= length; i++) {
+			if (document.querySelector('#bookAbbrDescription-' + i) != null && document.querySelector('#bookAbbrDescription-' + i).clientHeight < document.querySelector('#bookAbbrDescription-' + i).scrollHeight) {
+				$('#bookAbbrDescriptionPlaceHolder-' + i).css('display', 'block');
+			}
+		}
+	}
+	window.onload = function() {
+		hideReadMore();
+		$("#bookList").on('page.dt', function() {
+			$('html, body').animate({
+				scrollTop: $('#bookList').offset().top
+			}, 200);
+		});
+		$("#bookList").on('draw.dt', hideReadMore);
+	}
+	//]]>
+	</script>
+</body>
+
+</html>

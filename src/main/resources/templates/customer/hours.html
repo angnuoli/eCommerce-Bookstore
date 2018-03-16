@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: common-navbar"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-8">
+				<h2 class="section-headline"><span th:text="${user}? 'Hi, ' + ${#strings.toUpperCase(user.username)} : 'User Account'"></span></h2>
+			</div>
+			<div class="col-xs-4" style="margin-bottom: -8%">
+				<img src="/image/logo.png" alt="" class="img-responsive" />
+			</div>
+		</div>
+		
+		<!-- horizontal line and wood picture -->
+		<div th:replace="common/header :: frontpart-decoration"></div>
+
+		<div class="row" style="margin-top: 10px;">
+			<div class="col-xs-9 col-xs-offset-3">
+				<img src="/image/hours.png" alt="" class="img-responsive"/>
+			</div>
+		</div>
+	</div>  <!-- container -->
+
+	<!-- footer -->
+	<div th:replace="common/header :: footer"></div>
+
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+
+</body>
+</html>

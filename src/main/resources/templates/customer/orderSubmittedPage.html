@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: common-navbar"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-8">
+				<h2 class="section-headline">
+					<span
+						th:text="${user}? 'Hi, ' + ${#strings.toUpperCase(user.username)} : 'User Account'"></span>
+				</h2>
+			</div>
+			<div class="col-xs-4" style="margin-bottom: -8%">
+				<img src="/image/logo.png" alt="" class="img-responsive" />
+			</div>
+		</div>
+
+		<!-- horizontal line and wood picture -->
+		<div th:replace="common/header :: frontpart-decoration"></div>
+
+		<div class="row" style="margin-top: 10px;">
+			<div class="col-xs-12">
+				<div class="alert alert-success">
+					<h3>
+						<i class="fa fa-check" aria-hidden="true"
+							style="color: limegreen;"></i>Thank you, your order has been
+						placed.
+					</h3>
+					<h4>
+						The estimated delivery date is <span
+							th:text="${estimatedDeliveryDate}"></span>.
+					</h4>
+				</div>
+
+				<h3>List of Items</h3>
+
+				<!-- Diplay products in cart -->
+				<div class="row" th:each="cartItem : ${cartItemList}">
+					<hr />
+					<div class="col-xs-2">
+						<a th:href="@{/bookDetail(id=${cartItem.book.id})}"> <img
+							class="img-responsive"
+							th:src="@{/image/book/}+${cartItem.book.id}+'.png'"
+							style="width: 70px;" />
+						</a>
+					</div>
+
+					<div class="col-xs-6">
+						<a th:href="@{/bookDetail?id=} + ${cartItem.book.id}">
+						<h4 th:text="${cartItem.book.title}"></h4></a>
+					</div>
+
+					<div class="col-xs-2">
+						<h5 style="color: #db3208; font-size: large;">
+							$<span th:text="${cartItem.book.ourPrice}"
+								th:style="${cartItem.book.inStockNumber}==0?'text-decoration: line-through' : ''"></span>
+						</h5>
+					</div>
+
+					<div class="col-xs-2">
+						<h5 th:text="${cartItem.qty}" style="font-size: large;"></h5>
+					</div>
+				</div>
+
+				<hr />
+				<h4 class="col-xs-12 text-right"><strong style="font-size: large;">Order Total (<span th:text="${#lists.size(cartItemList)}"></span> items): </strong><span style="color: #db3208; font-size: large;">$<span th:text="${#numbers.formatDecimal(order.orderTotal*0.075, 0, 2)}+${order.orderTotal}"></span></span></h4>
+			</div>
+		</div>
+	</div>
+	<!-- container -->
+
+	<!-- footer -->
+	<div th:replace="common/header :: footer"></div>
+
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+
+</body>
+</html>

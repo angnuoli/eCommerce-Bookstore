@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:fragment="common-header">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Li's Bookstore</title>
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/style-admin.css}" />
+	<!-- textarea -->
+	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+	<script>
+	tinymce.init({ selector: 'textarea' });
+	</script>
+	<!-- data table -->
+	<link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/dataTables.bootstrap.min.css}" />
+	<!-- font awesome -->
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" />
+	<!-- Custom styles for this template -->
+	<link rel="icon" th:href="@{/image/apple-touch-icon.png}" />
+</head>
+
+<body>
+	<div th:fragment="common-navbar">
+		<nav id="admin-menu-navbar" class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="navbar" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" th:href="@{/adminportal/}">Admin Portal</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Book <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a th:href="@{/adminportal/book/add}">Add a new book</a></li>
+								<li><a th:href="@{/adminportal/book/bookList}">View book list</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a th:href="@{/logout}">Sign out</a></li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+	</div>
+	<div th:fragment="body-bottom-scripts">
+		<!-- Bootstrap core JavaScript
+	    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script th:src="@{/js/jquery.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/scripts-admin.js}"></script>
+		<script th:src="@{/js/bootbox.min.js}"></script>
+		<!-- data table -->
+		<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
+	</div>
+</body>
+
+</html>
